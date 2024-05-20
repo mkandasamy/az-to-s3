@@ -71,7 +71,7 @@ var containerNames = [
 
 // Storage Account containing the data
 module dataStorage './modules/storageAccount.module.bicep' = {
-  name: 'StorageAccount-${resourceNames.dataStorage}'
+  name: 'SA${resourceNames.dataStorage}'
   params: {
     name: resourceNames.dataStorage
     location: location
@@ -95,7 +95,7 @@ resource userAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@
 }
 
 module keyVault 'modules/keyvault.module.bicep' =  {
-  name: 'KeyVault-${resourceNames.keyVault}'
+  name: 'KV-${resourceNames.keyVault}'
   params: {
     name: resourceNames.keyVault
     location: location
@@ -129,7 +129,7 @@ module keyVault 'modules/keyvault.module.bicep' =  {
 // Function Application (with respected Application Insights and Storage Account)
 // with the respective configuration, and deployment of the application
 module funcAppComposite './modules/functionAppComposite.module.bicep' = {
-  name: 'FunctionAppComposite-${resourceNames.funcApp}'
+  name: 'FAC-${resourceNames.funcApp}'
   params: {
     location: location
     name: resourceNames.funcApp
