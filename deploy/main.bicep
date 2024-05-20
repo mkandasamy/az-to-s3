@@ -59,7 +59,7 @@ var resourceNames = {
 var secretNames = {
   awsAccessKey: 'awsAccessKey'
   awsSecretKey: 'awsSecretKey'  
-  dataStorageConnectionString: 'dataStorageConnectionString'
+  dataStorageConnectionString: 'dSCS'
 }
 
 // Containers for data storage account

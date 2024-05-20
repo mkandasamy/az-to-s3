@@ -1411,7 +1411,7 @@
             "secretNames": {
               "awsAccessKey": "awsAccessKey",
               "awsSecretKey": "awsSecretKey",
-              "dataStorageConnectionString": "dataStorageConnectionString"
+              "dataStorageConnectionString": "dSCS"
             },
             "containerNames": [
               "[parameters('archiveContainerName')]",
