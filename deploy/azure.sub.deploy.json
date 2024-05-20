@@ -1429,7 +1429,7 @@
               "apiVersion": "2019-06-01",
               "name": "[format('{0}/default/{1}', variables('resourceNames').dataStorage, variables('containerNames')[copyIndex()])]",
               "dependsOn": [
-                "[resourceId('Microsoft.Resources/deployments', format('StorageAccount-{0}', variables('resourceNames').dataStorage))]"
+                "[resourceId('Microsoft.Resources/deployments', format('SA-{0}', variables('resourceNames').dataStorage))]"
               ]
             },
             {
@@ -1441,7 +1441,7 @@
             {
               "type": "Microsoft.Resources/deployments",
               "apiVersion": "2022-09-01",
-              "name": "[format('StorageAccount-{0}', variables('resourceNames').dataStorage)]",
+              "name": "[format('SA-{0}', variables('resourceNames').dataStorage)]",
               "properties": {
                 "expressionEvaluationOptions": {
                   "scope": "inner"
@@ -1559,7 +1559,7 @@
                       "condition": "[variables('createSecretInKeyVault')]",
                       "type": "Microsoft.Resources/deployments",
                       "apiVersion": "2022-09-01",
-                      "name": "[format('StorageAccount-{0}-KeyVaultSecret-{1}', parameters('name'), parameters('keyVaultSecretName'))]",
+                      "name": "[format('SA-{0}-KV-{1}', parameters('name'), parameters('keyVaultSecretName'))]",
                       "properties": {
                         "expressionEvaluationOptions": {
                           "scope": "inner"
@@ -1664,11 +1664,11 @@
                     },
                     "keyVaultSecretUri": {
                       "type": "string",
-                      "value": "[if(variables('createSecretInKeyVault'), reference(resourceId('Microsoft.Resources/deployments', format('StorageAccount-{0}-KeyVaultSecret-{1}', parameters('name'), parameters('keyVaultSecretName'))), '2022-09-01').outputs.uri.value, '')]"
+                      "value": "[if(variables('createSecretInKeyVault'), reference(resourceId('Microsoft.Resources/deployments', format('SA-{0}-KV-{1}', parameters('name'), parameters('keyVaultSecretName'))), '2022-09-01').outputs.uri.value, '')]"
                     },
                     "keyVaultSecretReference": {
                       "type": "string",
-                      "value": "[if(variables('createSecretInKeyVault'), reference(resourceId('Microsoft.Resources/deployments', format('StorageAccount-{0}-KeyVaultSecret-{1}', parameters('name'), parameters('keyVaultSecretName'))), '2022-09-01').outputs.reference.value, '')]"
+                      "value": "[if(variables('createSecretInKeyVault'), reference(resourceId('Microsoft.Resources/deployments', format('SA-{0}-KV-{1}', parameters('name'), parameters('keyVaultSecretName'))), '2022-09-01').outputs.reference.value, '')]"
                     }
                   }
                 }
@@ -2014,7 +2014,7 @@
                     "value": [
                       {
                         "name": "DataStorageConnection",
-                        "value": "[reference(resourceId('Microsoft.Resources/deployments', format('StorageAccount-{0}', variables('resourceNames').dataStorage)), '2022-09-01').outputs.keyVaultSecretReference.value]"
+                        "value": "[reference(resourceId('Microsoft.Resources/deployments', format('SA-{0}', variables('resourceNames').dataStorage)), '2022-09-01').outputs.keyVaultSecretReference.value]"
                       },
                       {
                         "name": "AwsAccessKey",
@@ -2135,7 +2135,7 @@
                     {
                       "type": "Microsoft.Resources/deployments",
                       "apiVersion": "2022-09-01",
-                      "name": "[format('StorageAccount-{0}', variables('resourceNames').funcStorage)]",
+                      "name": "[format('SA-{0}', variables('resourceNames').funcStorage)]",
                       "properties": {
                         "expressionEvaluationOptions": {
                           "scope": "inner"
@@ -2253,7 +2253,7 @@
                               "condition": "[variables('createSecretInKeyVault')]",
                               "type": "Microsoft.Resources/deployments",
                               "apiVersion": "2022-09-01",
-                              "name": "[format('StorageAccount-{0}-KeyVaultSecret-{1}', parameters('name'), parameters('keyVaultSecretName'))]",
+                              "name": "[format('SA-{0}-KV-{1}', parameters('name'), parameters('keyVaultSecretName'))]",
                               "properties": {
                                 "expressionEvaluationOptions": {
                                   "scope": "inner"
@@ -2358,11 +2358,11 @@
                             },
                             "keyVaultSecretUri": {
                               "type": "string",
-                              "value": "[if(variables('createSecretInKeyVault'), reference(resourceId('Microsoft.Resources/deployments', format('StorageAccount-{0}-KeyVaultSecret-{1}', parameters('name'), parameters('keyVaultSecretName'))), '2022-09-01').outputs.uri.value, '')]"
+                              "value": "[if(variables('createSecretInKeyVault'), reference(resourceId('Microsoft.Resources/deployments', format('SA-{0}-KV-{1}', parameters('name'), parameters('keyVaultSecretName'))), '2022-09-01').outputs.uri.value, '')]"
                             },
                             "keyVaultSecretReference": {
                               "type": "string",
-                              "value": "[if(variables('createSecretInKeyVault'), reference(resourceId('Microsoft.Resources/deployments', format('StorageAccount-{0}-KeyVaultSecret-{1}', parameters('name'), parameters('keyVaultSecretName'))), '2022-09-01').outputs.reference.value, '')]"
+                              "value": "[if(variables('createSecretInKeyVault'), reference(resourceId('Microsoft.Resources/deployments', format('SA-{0}-KV-{1}', parameters('name'), parameters('keyVaultSecretName'))), '2022-09-01').outputs.reference.value, '')]"
                             }
                           }
                         }
@@ -2391,10 +2391,10 @@
                             "value": "[parameters('skuName')]"
                           },
                           "funcStorageName": {
-                            "value": "[reference(resourceId('Microsoft.Resources/deployments', format('StorageAccount-{0}', variables('resourceNames').funcStorage)), '2022-09-01').outputs.name.value]"
+                            "value": "[reference(resourceId('Microsoft.Resources/deployments', format('SA-{0}', variables('resourceNames').funcStorage)), '2022-09-01').outputs.name.value]"
                           },
                           "funcStorageKeyVaultSecretReference": {
-                            "value": "[reference(resourceId('Microsoft.Resources/deployments', format('StorageAccount-{0}', variables('resourceNames').funcStorage)), '2022-09-01').outputs.keyVaultSecretReference.value]"
+                            "value": "[reference(resourceId('Microsoft.Resources/deployments', format('SA-{0}', variables('resourceNames').funcStorage)), '2022-09-01').outputs.keyVaultSecretReference.value]"
                           },
                           "funcAppSettings": {
                             "value": "[parameters('funcAppSettings')]"
@@ -2741,7 +2741,7 @@
                         }
                       },
                       "dependsOn": [
-                        "[resourceId('Microsoft.Resources/deployments', format('StorageAccount-{0}', variables('resourceNames').funcStorage))]"
+                        "[resourceId('Microsoft.Resources/deployments', format('SA-{0}', variables('resourceNames').funcStorage))]"
                       ]
                     }
                   ],
@@ -2768,13 +2768,13 @@
                     },
                     "funcStorage": {
                       "type": "object",
-                      "value": "[reference(resourceId('Microsoft.Resources/deployments', format('StorageAccount-{0}', variables('resourceNames').funcStorage)), '2022-09-01').outputs]"
+                      "value": "[reference(resourceId('Microsoft.Resources/deployments', format('SA-{0}', variables('resourceNames').funcStorage)), '2022-09-01').outputs]"
                     }
                   }
                 }
               },
               "dependsOn": [
-                "[resourceId('Microsoft.Resources/deployments', format('StorageAccount-{0}', variables('resourceNames').dataStorage))]",
+                "[resourceId('Microsoft.Resources/deployments', format('SA-{0}', variables('resourceNames').dataStorage))]",
                 "[resourceId('Microsoft.Resources/deployments', format('KeyVault-{0}', variables('resourceNames').keyVault))]",
                 "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('resourceNames').userAssignedIdentity)]"
               ]
@@ -2783,7 +2783,7 @@
           "outputs": {
             "dataStorage": {
               "type": "object",
-              "value": "[reference(resourceId('Microsoft.Resources/deployments', format('StorageAccount-{0}', variables('resourceNames').dataStorage)), '2022-09-01')]"
+              "value": "[reference(resourceId('Microsoft.Resources/deployments', format('SA-{0}', variables('resourceNames').dataStorage)), '2022-09-01')]"
             },
             "keyVault": {
               "type": "object",
