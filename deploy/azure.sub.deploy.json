@@ -1979,7 +1979,7 @@
             {
               "type": "Microsoft.Resources/deployments",
               "apiVersion": "2022-09-01",
-              "name": "[format('FunctionAppComposite-{0}', variables('resourceNames').funcApp)]",
+              "name": "[format('FAC-{0}', variables('resourceNames').funcApp)]",
               "properties": {
                 "expressionEvaluationOptions": {
                   "scope": "inner"
